@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Deploy to Vercel — Step-by-Step Guide · PyMastery</title>
+  <meta name="description" content="Put this Python learning site online with Vercel — CLI route and GitHub route, vercel.json explained, custom domains and troubleshooting. Free and about 5 minutes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230A0F1C'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='14' font-weight='700' fill='white' text-anchor='middle'%3EPy%3C/text%3E%3C/svg%3E" />
+</head>
+
+<body>
+  <div id="scroll-progress"></div>
+
+  <nav class="navbar">
+    <a class="brand" href="index.html"><span class="logo">Py</span><span>PyMastery</span></a>
+    <button class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="modules.html">Modules</a></li>
+      <li><a href="practice.html">Practice</a></li>
+      <li><a href="playground.html">Playground</a></li>
+      <li><a href="setup.html">Setup</a></li>
+      <li><a href="deploy.html">Deploy</a></li>
+      <li><a class="nav-cta" href="learn.html">Start learning</a></li>
+    </ul>
+  </nav>
+
+  <header class="page-hero">
+    <div class="inner">
+      <div class="crumb"><a href="index.html">Home</a> / Deploy</div>
+      <h1>Ship this site to <span class="serif">Vercel</span></h1>
+      <p>The site is pure static files — no build step, no backend — so deployment is genuinely one command. Pick the CLI route (fastest) or the GitHub route (automatic updates). Both are free.</p>
+    </div>
+  </header>
+
+  <div class="guide">
+    <div class="guide-grid">
+
+      <!-- ============ TABLE OF CONTENTS ============ -->
+      <aside class="toc">
+        <div class="toc-title">On this page</div>
+        <ol>
+          <li><a href="#step-need">What you need</a></li>
+          <li><a href="#step-cli">Method 1 — Vercel CLI</a></li>
+          <li><a href="#step-git">Method 2 — GitHub</a></li>
+          <li><a href="#step-config">vercel.json explained</a></li>
+          <li><a href="#step-domain">Custom domain</a></li>
+          <li><a href="#step-updates">Updates &amp; redeploys</a></li>
+          <li><a href="#step-check">Deploy checklist</a></li>
+          <li><a href="#step-fix">Troubleshooting</a></li>
+        </ol>
+      </aside>
+
+      <div>
+
+        <!-- ================= 1. WHAT YOU NEED ================= -->
+        <section class="step" id="step-need">
+          <div class="step-head">
+            <span class="step-num">1</span>
+            <div>
+              <h2>What you need</h2>
+              <p class="step-sub">Two accounts and one folder — that's the entire prerequisites list.</p>
+            </div>
+          </div>
+
+          <ul class="plain">
+            <li><b>The project folder</b> — the one containing <code>index.html</code>, <code>css/</code> and <code>js/</code>:</li>
+          </ul>
+          <div class="file-tree">
+            <b>pymastery/</b><br />
+            ├── index.html &nbsp;<span class="dim">(+ learn, modules, practice, playground, setup, deploy)</span><br />
+            ├── vercel.json<br />
+            ├── css/<br />
+            │&nbsp;&nbsp; └── <b>styles.css</b><br />
+            └── js/<br />
+            &nbsp;&nbsp;&nbsp;&nbsp; ├── main.js · learn.js · modules.js · practice.js · playground.js<br />
+            &nbsp;&nbsp;&nbsp;&nbsp; └── data/<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; └── lessons.js · modules.js · problems.js
+          </div>
+          <ul class="plain">
+            <li><b>A free Vercel account</b> — sign up at <a href="https://vercel.com" target="_blank" rel="noopener">vercel.com</a> (GitHub, email or GitLab login).</li>
+            <li><b>For Method 1:</b> Node.js LTS from <a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a> — install it, then confirm in a new terminal:</li>
+          </ul>
+          <div class="cmd">
+            <div class="cmd-head"><span>Verify Node &amp; npm</span><span class="actions"><button class="copy-btn">Copy</button></span></div>
+            <pre><code>node -v
+npm -v</code></pre>
+          </div>
+          <div class="callout info"><span data-icon="info"></span><div><b>Why this deploys so easily:</b> there is nothing to compile. Vercel serves the files exactly as they are, adds HTTPS, a global CDN and a <code>*.vercel.app</code> URL for free.</div></div>
+        </section>
+
+        <!-- ================= 2. CLI METHOD ================= -->
+        <section class="step" id="step-cli">
+          <div class="step-head">
+            <span class="step-num">2</span>
+            <div>
+              <h2>Method 1 — Vercel CLI (fastest)</h2>
+              <p class="step-sub">From zero to a live URL in the terminal, no browser juggling.</p>
+            </div>
+          </div>
+
+          <ol class="numlist">
+            <li><b>Install the Vercel CLI globally:</b></li>
+          </ol>
+          <div class="cmd">
+            <div class="cmd-head"><span>Terminal</span><span class="actions"><button class="copy-btn">Copy</button></span></div>
+            <pre><code>npm install -g vercel</code></pre>
+          </div>
+
+          <ol class="numlist" style="counter-reset:s 1">
+            <li><b>Go to your project folder</b> (the one with <code>index.html</code>):</li>
+          </ol>
+          <div class="cmd">
+            <div class="cmd-head"><span>Terminal</span><span class="actions"><button class="copy-btn">Copy</button></span></div>
+            <pre><code>cd path/to/pymastery</code></pre>
+          </div>
+
+          <ol class="numlist" style="counter-reset:s 2">
+            <li><b>Log in</b> — opens the browser once, then remembers you:</li>
+          </ol>
+          <div class="cmd">
+            <div class="cmd-head"><span>Terminal</span><span class="actions"><button class="copy-btn">Copy</button></span></div>
+            <pre><code>vercel login</code></pre>
+          </div>
+
+          <ol class="numlist" style="counter-reset:s 3">
+            <li><b>Deploy a preview</b> — answer the prompts like this:</li>
+          </ol>
+          <div class="cmd">
+            <div class="cmd-head"><span>Terminal — vercel (interactive)</span></div>
+            <pre><code>vercel
+
+Set up and deploy? <span class="ok">Y</span>
+Which scope? <span class="ok">your-account</span>
+Link to existing project? <span class="ok">N</span>
+Project name: <span class="ok">pymastery</span>
+In which directory is your code? <span class="ok">./</span>
+Want to modify the settings? <span class="ok">N</span>
+<span class="cm"># → "Inspect: https://vercel.com/…/pymastery/…”</span></code></pre>
+          </div>
+
+          <ol class="numlist" style="counter-reset:s 4">
+            <li><b>Promote it to production</b> — this gives you the real public URL:</li>
+          </ol>
+          <div class="cmd">
+            <div class="cmd-head"><span>Terminal</span><span class="actions"><button class="copy-btn">Copy</button></span></div>
+            <pre><code>vercel --prod</code></pre>
+          </div>
+          <div class="cmd">
+            <div class="cmd-head"><span>Result</span></div>
+            <pre><code>Production: https://pymastery.vercel.app <span class="cm">[3s]</span></code></pre>
+          </div>
+          <div class="callout good"><span data-icon="check-circle"></span><div><b>Open that URL — the site is live.</b> Every page works: curriculum, modules, challenges and the in-browser Python runtime (loaded over HTTPS, which the CDN requires).</div></div>
+        </section>
+
+        <!-- ================= 3. GITHUB METHOD ================= -->
+        <section class="step" id="step-git">
+          <div class="step-head">
+            <span class="step-num">3</span>
+            <div>
+              <h2>Method 2 — GitHub + dashboard (auto-updates)</h2>
+              <p class="step-sub">Every <code>git push</code> redeploys automatically. Best for a project you keep improving.</p>
+            </div>
+          </div>
+
+          <ol class="numlist">
+            <li><b>Put the project in a Git repository</b> (skip if you already have one):</li>
+          </ol>
+          <div class="cmd">
+            <div class="cmd-head"><span>Terminal — inside the project folder</span><span class="actions"><button class="copy-btn">Copy</button></span></div>
+            <pre><code>git init
+git add .
+git commit -m "Initial commit — PyMastery site"</code></pre>
+          </div>
+
+          <ol class="numlist" style="counter-reset:s 1">
+            <li><b>Create the repo on GitHub</b> — easiest via the browser at <a href="https://github.com/new" target="_blank" rel="noopener">github.com/new</a> (public or private), or with the GitHub CLI:</li>
+          </ol>
+          <div class="cmd">
+            <div class="cmd-head"><span>Terminal — optional GitHub CLI route</span><span class="actions"><button class="copy-btn">Copy</button></span></div>
+            <pre><code>gh repo create pymastery --public --source=. --push</code></pre>
+          </div>
+          <p>If you created the repo in the browser instead, push to it:</p>
+          <div class="cmd">
+            <div class="cmd-head"><span>Terminal</span><span class="actions"><button class="copy-btn">Copy</button></span></div>
+            <pre><code>git remote add origin https://github.com/YOUR-USER/pymastery.git
+git branch -M main
+git push -u origin main</code></pre>
+          </div>
+
+          <ol class="numlist" style="counter-reset:s 2">
+            <li><b>Import the repo in Vercel</b> — go to <a href="https://vercel.com/new" target="_blank" rel="noopener">vercel.com/new</a>, choose <b>Import</b> next to your repository (grant access the first time).</li>
+          </ol>
+
+          <ol class="numlist" style="counter-reset:s 3">
+            <li><b>Confirm the build settings</b> — for this static site they are trivial:</li>
+          </ol>
+          <div class="table-wrap">
+            <table class="tbl">
+              <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+              <tbody>
+                <tr><td>Framework Preset</td><td><b>Other</b> (nothing to build)</td></tr>
+                <tr><td>Build Command</td><td><em>leave empty</em></td></tr>
+                <tr><td>Output Directory</td><td><b>/</b> (repository root)</td></tr>
+                <tr><td>Install Command</td><td><em>leave empty</em></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ol class="numlist" style="counter-reset:s 4">
+            <li><b>Press Deploy.</b> Vercel builds in seconds and hands you a <code>*.vercel.app</code> URL. From now on, every <code>git push</code> to <code>main</code> publishes a new production deploy automatically; other branches get shareable preview URLs.</li>
+          </ol>
+        </section>
+
+        <!-- ================= 4. VERCEL.JSON ================= -->
+        <section class="step" id="step-config">
+          <div class="step-head">
+            <span class="step-num">4</span>
+            <div>
+              <h2>vercel.json, explained</h2>
+              <p class="step-sub">This project ships one — here is exactly what each line does.</p>
+            </div>
+          </div>
+
+          <div class="code-wrap">
+            <div class="code-head">
+              <span class="code-title">vercel.json</span>
+              <span class="actions"><button class="copy-btn">Copy</button></span>
+            </div>
+            <pre><code>{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "outputDirectory": ".",
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}</code></pre>
+          </div>
+
+          <div class="table-wrap">
+            <table class="tbl">
+              <thead><tr><th>Key</th><th>Meaning</th></tr></thead>
+              <tbody>
+                <tr><td><code>cleanUrls: true</code></td><td>Serves <code>/learn</code> instead of <code>/learn.html</code>. Direct <code>.html</code> links keep working, so nothing breaks.</td></tr>
+                <tr><td><code>trailingSlash: false</code></td><td>One canonical URL per page — avoids duplicate-content SEO issues.</td></tr>
+                <tr><td><code>outputDirectory: "."</code></td><td>Deploy the folder as-is, no build. (If Vercel ever rejects the file, delete this line — the dashboard default is the repo root anyway.)</td></tr>
+                <tr><td><code>headers</code></td><td>Small security hardening headers on every response.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout info"><span data-icon="info"></span><div>Deleting <code>vercel.json</code> entirely also works — Vercel will simply serve the folder with its defaults. The file just makes the behavior explicit and repeatable.</div></div>
+        </section>
+
+        <!-- ================= 5. DOMAIN ================= -->
+        <section class="step" id="step-domain">
+          <div class="step-head">
+            <span class="step-num">5</span>
+            <div>
+              <h2>Add your own domain (optional)</h2>
+              <p class="step-sub">Turn pymastery.vercel.app into learnpython.com — HTTPS is issued automatically.</p>
+            </div>
+          </div>
+
+          <ol class="numlist">
+            <li>In the Vercel dashboard: open your project → <b>Settings → Domains</b>.</li>
+            <li>Type your domain (e.g. <code>learnpython.com</code>) and press <b>Add</b>.</li>
+            <li>Vercel shows the DNS records to create. At your registrar:
+              <ul class="plain" style="margin-top:8px">
+                <li>Apex domain → an <b>A</b> record pointing to <code>76.76.21.21</code></li>
+                <li>Subdomain (e.g. <code>www</code>) → a <b>CNAME</b> record pointing to <code>cname.vercel-dns.com</code></li>
+              </ul>
+            </li>
+            <li>Wait for DNS to propagate (minutes to 24 h) — the certificate is provisioned automatically once it resolves.</li>
+          </ol>
+        </section>
+
+        <!-- ================= 6. UPDATES ================= -->
+        <section class="step" id="step-updates">
+          <div class="step-head">
+            <span class="step-num">6</span>
+            <div>
+              <h2>Updates &amp; redeploys</h2>
+              <p class="step-sub">Changing content later takes seconds.</p>
+            </div>
+          </div>
+
+          <div class="cmd">
+            <div class="cmd-head"><span>CLI project — publish changes</span><span class="actions"><button class="copy-btn">Copy</button></span></div>
+            <pre><code>cd path/to/pymastery
+vercel --prod</code></pre>
+          </div>
+          <div class="cmd">
+            <div class="cmd-head"><span>GitHub project — publish changes</span><span class="actions"><button class="copy-btn">Copy</button></span></div>
+            <pre><code>git add .
+git commit -m "Update lesson content"
+git push</code></pre>
+          </div>
+          <div class="table-wrap">
+            <table class="tbl">
+              <thead><tr><th>Task</th><th>Command / action</th></tr></thead>
+              <tbody>
+                <tr><td>Preview a branch</td><td>Push any branch that isn't <code>main</code> — you get a preview URL</td></tr>
+                <tr><td>Roll back</td><td>Dashboard → project → <b>Deployments</b> → <b>… → Promote to Production</b></td></tr>
+                <tr><td>Rename the project</td><td>Settings → Project Name (the URL changes with it)</td></tr>
+                <tr><td>Unlink this folder</td><td><code>vercel rm</code> in the project folder, or remove the integration on GitHub</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ================= 7. CHECKLIST ================= -->
+        <section class="step" id="step-check">
+          <div class="step-head">
+            <span class="step-num">7</span>
+            <div>
+              <h2>Deploy checklist</h2>
+              <p class="step-sub">Saved in your browser as you tick.</p>
+            </div>
+          </div>
+
+          <div class="checklist" id="deploy-checklist">
+            <label class="check-item"><input type="checkbox" /><span class="check-box" data-icon="check"></span><span class="c-text"><b>Site works locally</b>python -m http.server 8099 serves every page</span></label>
+            <label class="check-item"><input type="checkbox" /><span class="check-box" data-icon="check"></span><span class="c-text"><b>Vercel account created</b>vercel.com sign-in done</span></label>
+            <label class="check-item"><input type="checkbox" /><span class="check-box" data-icon="check"></span><span class="c-text"><b>Code pushed or folder ready</b>either a Git repo or direct CLI deploy</span></label>
+            <label class="check-item"><input type="checkbox" /><span class="check-box" data-icon="check"></span><span class="c-text"><b>First deployment live</b>the *.vercel.app URL opens correctly</span></label>
+            <label class="check-item"><input type="checkbox" /><span class="check-box" data-icon="check"></span><span class="c-text"><b>Pyodide loads on the live site</b>playground runs code over HTTPS</span></label>
+            <label class="check-item"><input type="checkbox" /><span class="check-box" data-icon="check"></span><span class="c-text"><b>Tested on a phone</b>layout and navigation feel right on a small screen</span></label>
+            <label class="check-item"><input type="checkbox" /><span class="check-box" data-icon="check"></span><span class="c-text"><b>(Optional) custom domain</b>DNS records added and certificate issued</span></label>
+          </div>
+        </section>
+
+        <!-- ================= 8. TROUBLESHOOTING ================= -->
+        <section class="step" id="step-fix">
+          <div class="step-head">
+            <span class="step-num">8</span>
+            <div>
+              <h2>Troubleshooting</h2>
+              <p class="step-sub">Everything below has a one-line fix.</p>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="tbl">
+              <thead><tr><th>Symptom</th><th>Fix</th></tr></thead>
+              <tbody>
+                <tr><td><code>vercel: command not found</code></td><td>Reopen the terminal after <code>npm install -g vercel</code>, or run it via <code>npx vercel</code> instead</td></tr>
+                <tr><td>Deployed folder shows a file listing / 404</td><td>You deployed a parent folder. The directory containing <code>index.html</code> must be the project root</td></tr>
+                <tr><td>Blank page or missing CSS</td><td>Check the paths are relative (no leading <code>/</code>) — this project already uses relative paths everywhere</td></tr>
+                <tr><td>Playground never loads the runtime</td><td>It needs the jsDelivr CDN — check the browser console. Everything else still works offline of that</td></tr>
+                <tr><td>“Authentication required” on first CLI run</td><td>Run <code>vercel login</code> first, then <code>vercel --prod</code></td></tr>
+                <tr><td>Wrong project linked</td><td>Run <code>vercel link</code> again inside the correct folder (it creates <code>.vercel/project.json</code>)</td></tr>
+                <tr><td>Old version still showing</td><td>Vercel's CDN caches hard — append <code>?v=2</code> to test, or wait a few seconds and refresh</td></tr>
+                <tr><td>Custom domain not securing</td><td>Confirm the DNS records exactly as Vercel shows them; apex uses A <code>76.76.21.21</code>, www uses CNAME <code>cname.vercel-dns.com</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout good"><span data-icon="rocket"></span><div><b>That's it.</b> Your copy of PyMastery is live on a free, globally distributed, HTTPS-secured URL — and you deployed it yourself from the terminal. Next stop: the <a href="learn.html">curriculum</a>.</div></div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="index.html"><span class="logo">Py</span><span>PyMastery</span></a>
+        <p>A complete, free path from your first <code>print()</code> to production Python — lessons, module guides, tested challenges and a real in-browser runtime.</p>
+      </div>
+      <div>
+        <h5>Learn</h5>
+        <ul>
+          <li><a href="learn.html">Full curriculum</a></li>
+          <li><a href="learn.html?level=beginner">Beginner track</a></li>
+          <li><a href="learn.html?level=pro">Pro track</a></li>
+          <li><a href="playground.html">Live playground</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Practice</h5>
+        <ul>
+          <li><a href="modules.html">Module library</a></li>
+          <li><a href="practice.html">Challenges</a></li>
+          <li><a href="modules.html?cat=Data%20Science">Data science</a></li>
+          <li><a href="modules.html?cat=System">System &amp; OS</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Guides</h5>
+        <ul>
+          <li><a href="setup.html">Install Python</a></li>
+          <li><a href="setup.html#step-trouble">Troubleshooting</a></li>
+          <li><a href="deploy.html">Deploy to Vercel</a></li>
+          <li><a href="https://www.python.org" target="_blank" rel="noopener">python.org</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 PyMastery — built with vanilla HTML, CSS &amp; JavaScript.</span>
+      <span>Runs on real Python via <a href="https://pyodide.org" target="_blank" rel="noopener">Pyodide</a> · Ready for <a href="deploy.html">Vercel</a></span>
+    </div>
+  </footer>
+
+  <button id="to-top" aria-label="Back to top"><span data-icon="arrow-down"></span></button>
+
+  <script src="js/main.js"></script>
+  <script>
+    /* ---------- deploy checklist (persisted) ---------- */
+    (function () {
+      const KEY = "pymastery.deploy";
+      const items = [...document.querySelectorAll("#deploy-checklist .check-item")];
+      let state = [];
+      try { state = JSON.parse(localStorage.getItem(KEY)) || []; } catch (_) {}
+
+      items.forEach((item, i) => {
+        const box = item.querySelector("input");
+        if (state.includes(i)) { box.checked = true; item.classList.add("done"); }
+        box.addEventListener("change", () => {
+          item.classList.toggle("done", box.checked);
+          state = items
+            .map((it, j) => (it.querySelector("input").checked ? j : -1))
+            .filter((j) => j >= 0);
+          localStorage.setItem(KEY, JSON.stringify(state));
+          if (state.length === items.length)
+            toast("Deployment checklist complete — live on the web!");
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

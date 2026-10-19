@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Install Python — Step-by-Step Setup Guide · PyMastery</title>
+  <meta name="description"
+    content="Install and set up Python on Windows, macOS or Linux in about 10 minutes — exact CLI commands, PATH fixes, virtual environments, pip, VS Code and troubleshooting." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230A0F1C'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='14' font-weight='700' fill='white' text-anchor='middle'%3EPy%3C/text%3E%3C/svg%3E" />
+</head>
+
+<body>
+  <div id="scroll-progress"></div>
+
+  <nav class="navbar">
+    <a class="brand" href="index.html"><span class="logo">Py</span><span>PyMastery</span></a>
+    <button class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="modules.html">Modules</a></li>
+      <li><a href="practice.html">Practice</a></li>
+      <li><a href="playground.html">Playground</a></li>
+      <li><a href="setup.html">Setup</a></li>
+      <li><a href="deploy.html">Deploy</a></li>
+      <li><a class="nav-cta" href="learn.html">Start learning</a></li>
+    </ul>
+  </nav>
+
+  <header class="page-hero">
+    <div class="inner">
+      <div class="crumb"><a href="index.html">Home</a> / Setup</div>
+      <h1>Install Python, <span class="serif">step by step</span></h1>
+      <p>About 10 minutes on Windows, macOS or Linux. Every step shows the exact command to type and what you should see
+        — plus fixes for the errors people hit most often.</p>
+    </div>
+  </header>
+
+  <div class="guide">
+    <div class="guide-grid">
+
+      <!-- ============ TABLE OF CONTENTS ============ -->
+      <aside class="toc">
+        <div class="toc-title">On this page</div>
+        <ol>
+          <li><a href="#step-download">Download Python</a></li>
+          <li><a href="#step-verify">Verify the install</a></li>
+          <li><a href="#step-editor">Install an editor</a></li>
+          <li><a href="#step-project">First project (CLI)</a></li>
+          <li><a href="#step-pip">pip &amp; packages</a></li>
+          <li><a href="#step-cli">Essential commands</a></li>
+          <li><a href="#step-local">Run this site locally</a></li>
+          <li><a href="#step-checklist">Setup checklist</a></li>
+          <li><a href="#step-trouble">Troubleshooting</a></li>
+        </ol>
+      </aside>
+
+      <div>
+
+        <!-- ================= 1. DOWNLOAD ================= -->
+        <section class="step" id="step-download">
+          <div class="step-head">
+            <span class="step-num">1</span>
+            <div>
+              <h2>Download &amp; install Python</h2>
+              <p class="step-sub">Pick your operating system. Two routes each: the official installer (GUI) or a
+                one-line CLI command.</p>
+            </div>
+          </div>
+
+          <div class="os-tabs" id="os-tabs">
+            <button class="os-tab active" data-os="windows" data-icon="grid">Windows</button>
+            <button class="os-tab" data-os="macos" data-icon="command">macOS</button>
+            <button class="os-tab" data-os="linux" data-icon="terminal">Linux</button>
+          </div>
+
+          <!-- WINDOWS -->
+          <div class="os-pane active" id="pane-windows">
+            <p><b>Option A — installer (easiest):</b></p>
+            <ul class="plain">
+              <li>Open <a href="https://www.python.org/downloads/" target="_blank"
+                  rel="noopener">python.org/downloads</a> and click <b>Download Python 3.x.x</b> (the big yellow
+                button).</li>
+              <li>Run the downloaded <code>python-3.x.x-amd64.exe</code>.</li>
+              <li class="callout warn" style="margin:8px 0"><span data-icon="alert"></span>
+                <div><b>Critical:</b> tick <b>“Add python.exe to PATH”</b> at the bottom of the installer window
+                  <em>before</em> clicking Install Now. Skipping this causes 90% of “python is not recognized” problems.
+                </div>
+              </li>
+              <li>Click <b>Install Now</b>, wait ~1 minute, then <b>Close</b>.</li>
+            </ul>
+            <p><b>Option B — one command (winget):</b> Windows 10/11 ships the <code>winget</code> package manager. Open
+              <b>PowerShell</b> and run:</p>
+            <div class="cmd">
+              <div class="cmd-head"><span>PowerShell</span><span class="actions"><button
+                    class="copy-btn">Copy</button></span></div>
+              <pre><code>winget install --id Python.Python.3.13 -e</code></pre>
+            </div>
+            <p>If several versions exist, list them first with <code>winget search Python.Python</code>. Close and
+              reopen PowerShell after installing.</p>
+          </div>
+
+          <!-- MACOS -->
+          <div class="os-pane" id="pane-macos">
+            <p><b>Option A — official installer:</b> download the <b>macOS 64-bit universal2 installer</b> from <a
+                href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org/downloads</a>, open
+              the <code>.pkg</code> file and follow the wizard (Continue → Install).</p>
+            <p><b>Option B — Homebrew (one command):</b> if you have <a href="https://brew.sh" target="_blank"
+                rel="noopener">Homebrew</a> installed, open <b>Terminal</b> and run:</p>
+            <div class="cmd">
+              <div class="cmd-head"><span>Terminal</span><span class="actions"><button
+                    class="copy-btn">Copy</button></span></div>
+              <pre><code>brew install python@3.13</code></pre>
+            </div>
+            <div class="callout info"><span data-icon="info"></span>
+              <div>On macOS the command is <b><code>python3</code></b> (not <code>python</code>) — Apple reserves
+                <code>python</code> for its legacy stub. This is normal and covered in step 2.</div>
+            </div>
+          </div>
+
+          <!-- LINUX -->
+          <div class="os-pane" id="pane-linux">
+            <p>Most Linux distributions already include Python 3. If not (or you want the newest), use your package
+              manager in the Terminal:</p>
+            <div class="cmd">
+              <div class="cmd-head"><span>Ubuntu / Debian</span><span class="actions"><button
+                    class="copy-btn">Copy</button></span></div>
+              <pre><code>sudo apt update
+sudo apt install -y python3 python3-pip python3-venv</code></pre>
+            </div>
+            <div class="cmd">
+              <div class="cmd-head"><span>Fedora</span><span class="actions"><button
+                    class="copy-btn">Copy</button></span></div>
+              <pre><code>sudo dnf install -y python3 python3-pip</code></pre>
+            </div>
+            <div class="cmd">
+              <div class="cmd-head"><span>Arch</span><span class="actions"><button class="copy-btn">Copy</button></span>
+              </div>
+              <pre><code>sudo pacman -S python python-pip</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= 2. VERIFY ================= -->
+        <section class="step" id="step-verify">
+          <div class="step-head">
+            <span class="step-num">2</span>
+            <div>
+              <h2>Verify the installation</h2>
+              <p class="step-sub">Open a fresh terminal and confirm Python and pip both answer.</p>
+            </div>
+          </div>
+
+          <div class="cmd">
+            <div class="cmd-head"><span>Windows — PowerShell or CMD</span><span class="actions"><button
+                  class="copy-btn">Copy</button></span></div>
+            <pre><code>python --version
+py --version
+python -m pip --version</code></pre>
+          </div>
+          <div class="cmd">
+            <div class="cmd-head"><span>macOS / Linux — Terminal</span><span class="actions"><button
+                  class="copy-btn">Copy</button></span></div>
+            <pre><code>python3 --version
+python3 -m pip --version</code></pre>
+          </div>
+
+          <p><b>Expected output</b> (versions may differ, the shape should match):</p>
+          <div class="cmd">
+            <div class="cmd-head"><span>Result</span></div>
+            <pre><code>Python 3.13.1
+pip 25.0.1 from C:\...\Lib\site-packages\pip (python 3.13)</code></pre>
+          </div>
+
+          <div class="callout good"><span data-icon="check-circle"></span>
+            <div><b>If both commands print a version, you are done installing.</b> Skip to step 4 — or step 3 if you
+              also want an editor. If a command failed, jump to <a href="#step-trouble">Troubleshooting</a>.</div>
+          </div>
+        </section>
+
+        <!-- ================= 3. EDITOR ================= -->
+        <section class="step" id="step-editor">
+          <div class="step-head">
+            <span class="step-num">3</span>
+            <div>
+              <h2>Install a code editor (recommended)</h2>
+              <p class="step-sub">Any text editor works, but a proper editor gives you autocomplete, linting and one-key
+                running.</p>
+            </div>
+          </div>
+
+          <p><b>Visual Studio Code</b> — the most popular free option:</p>
+          <ul class="plain">
+            <li>Download it from <a href="https://code.visualstudio.com" target="_blank"
+                rel="noopener">code.visualstudio.com</a> (or <code>winget install Microsoft.VisualStudioCode</code> /
+              <code>brew install --cask visual-studio-code</code>).</li>
+            <li>Open it and install the <b>Python</b> extension (publisher: Microsoft) — it bundles Pylance, the
+              debugger, and a test runner.</li>
+            <li>Open your project folder: <b>File → Open Folder</b>, or from the terminal: <code>code .</code></li>
+            <li>Run code instantly: open a <code>.py</code> file and press the <b>▶ Run</b> button (top right) or <kbd
+                class="kbd">Ctrl</kbd>+<kbd class="kbd">F5</kbd>.</li>
+          </ul>
+          <div class="callout info"><span data-icon="info"></span>
+            <div>Alternatives: <b>PyCharm Community</b> (full IDE), <b>Thonny</b> (beginner-friendly, great for first
+              steps), or <b>Sublime Text</b> (fast and light). Even Notepad works — the interpreter does not care.</div>
+          </div>
+        </section>
+
+        <!-- ================= 4. FIRST PROJECT ================= -->
+        <section class="step" id="step-project">
+          <div class="step-head">
+            <span class="step-num">4</span>
+            <div>
+              <h2>Create your first project — all CLI</h2>
+              <p class="step-sub">Folders, a virtual environment and a hello-world script, using nothing but terminal
+                commands.</p>
+            </div>
+          </div>
+
+          <div class="cmd">
+            <div class="cmd-head"><span>Windows — PowerShell</span><span class="actions"><button
+                  class="copy-btn">Copy</button></span></div>
+            <pre><code>mkdir hello-python
+cd hello-python
+
+<span class="cm"># create an isolated environment for this project</span>
+python -m venv .venv
+
+<span class="cm"># activate it (PowerShell)</span>
+.venv\Scripts\Activate.ps1
+
+<span class="cm"># if PowerShell blocks the script, allow it once:</span>
+<span class="cm"># Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</span></code></pre>
+          </div>
+
+          <div class="cmd">
+            <div class="cmd-head"><span>Windows — CMD</span><span class="actions"><button
+                  class="copy-btn">Copy</button></span></div>
+            <pre><code>mkdir hello-python
+cd hello-python
+python -m venv .venv
+.venv\Scripts\activate.bat</code></pre>
+          </div>
+
+          <div class="cmd">
+            <div class="cmd-head"><span>macOS / Linux</span><span class="actions"><button
+                  class="copy-btn">Copy</button></span></div>
+            <pre><code>mkdir hello-python
+cd hello-python
+python3 -m venv .venv
+source .venv/bin/activate</code></pre>
+          </div>
+
+          <p>When the environment is active your prompt gets a <code>(.venv)</code> prefix. Now create the program —
+            type this in your editor, or entirely from the terminal:</p>
+
+          <div class="cmd">
+            <div class="cmd-head"><span>Create hello.py — Windows PowerShell</span><span class="actions"><button
+                  class="copy-btn">Copy</button></span></div>
+            <pre><code>@'
+def greet(name: str) -> str:
+    return f"Hello, {name}! Welcome to Python."
+
+for person in ["Ada", "Linus", "Guido"]:
+    print(greet(person))
+
+print("Python version:")
+import sys
+print(sys.version)
+'@ | Out-File -Encoding utf8 hello.py</code></pre>
+          </div>
+          <div class="cmd">
+            <div class="cmd-head"><span>Create hello.py — macOS / Linux</span><span class="actions"><button
+                  class="copy-btn">Copy</button></span></div>
+            <pre><code>cat &gt; hello.py &lt;&lt; 'EOF'
+def greet(name: str) -> str:
+    return f"Hello, {name}! Welcome to Python."
+
+for person in ["Ada", "Linus", "Guido"]:
+    print(greet(person))
+
+print("Python version:")
+import sys
+print(sys.version)
+EOF</code></pre>
+          </div>
+
+          <div class="code-wrap">
+            <div class="code-head">
+              <span class="code-title">hello.py</span>
+              <span class="actions"><button class="copy-btn">Copy</button></span>
+            </div>
+            <pre><code data-py>def greet(name: str) -> str:
+    return f"Hello, {name}! Welcome to Python."
+
+for person in ["Ada", "Linus", "Guido"]:
+    print(greet(person))
+
+print("Python version:")
+import sys
+print(sys.version)</code></pre>
+          </div>
+
+          <p>Run it:</p>
+          <div class="cmd">
+            <div class="cmd-head"><span>Run</span><span class="actions"><button class="copy-btn">Copy</button></span>
+            </div>
+            <pre><code>python hello.py
+<span class="cm"># macOS / Linux: python3 hello.py</span></code></pre>
+          </div>
+          <div class="cmd">
+            <div class="cmd-head"><span>Output</span></div>
+            <pre><code>Hello, Ada! Welcome to Python.
+Hello, Linus! Welcome to Python.
+Hello, Guido! Welcome to Python.
+Python version:
+3.13.1 (tags/v3.13.1:0671451, ...) [...]</code></pre>
+          </div>
+
+          <div class="callout good"><span data-icon="check-circle"></span>
+            <div><b>Congratulations — you are running Python.</b> From here, work through the <a
+                href="learn.html">curriculum</a> and type every example yourself; typing the code is how it sticks.
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= 5. PIP ================= -->
+        <section class="step" id="step-pip">
+          <div class="step-head">
+            <span class="step-num">5</span>
+            <div>
+              <h2>Install packages with pip</h2>
+              <p class="step-sub">pip is Python's package manager — 500,000+ libraries on PyPI, one command away.</p>
+            </div>
+          </div>
+
+          <div class="cmd">
+            <div class="cmd-head"><span>Essential pip commands</span><span class="actions"><button
+                  class="copy-btn">Copy</button></span></div>
+            <pre><code>pip install requests          <span class="cm"># install one package</span>
+pip install requests==2.32.3  <span class="cm"># pin an exact version</span>
+pip list                      <span class="cm"># what's installed</span>
+pip show requests             <span class="cm"># details about one package</span>
+pip uninstall -y requests     <span class="cm"># remove it</span></code></pre>
+          </div>
+
+          <p>Real projects freeze their dependencies so anyone can rebuild the environment:</p>
+          <div class="cmd">
+            <div class="cmd-head"><span>Reproducible environments</span><span class="actions"><button
+                  class="copy-btn">Copy</button></span></div>
+            <pre><code>pip freeze &gt; requirements.txt        <span class="cm"># save current state</span>
+pip install -r requirements.txt      <span class="cm"># rebuild it elsewhere</span></code></pre>
+          </div>
+
+          <div class="cmd">
+            <div class="cmd-head"><span>Try it right now</span><span class="actions"><button
+                  class="copy-btn">Copy</button></span></div>
+            <pre><code>pip install requests
+python -c "import requests; r = requests.get('https://httpbin.org/get'); print(r.status_code)"</code></pre>
+          </div>
+
+          <div class="callout warn"><span data-icon="alert"></span>
+            <div><b>Always work inside a virtual environment</b> (<code>venv</code>). It keeps each project's packages
+              separate and avoids the <code>error: externally-managed-environment</code> message that newer
+              Ubuntu/Debian/macOS python3 prints when pip is used system-wide.</div>
+          </div>
+        </section>
+
+        <!-- ================= 6. CLI CHEATSHEET ================= -->
+        <section class="step" id="step-cli">
+          <div class="step-head">
+            <span class="step-num">6</span>
+            <div>
+              <h2>Essential terminal commands</h2>
+              <p class="step-sub">The small set you will use every day. Windows column shows PowerShell equivalents.</p>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th>Task</th>
+                  <th>Windows (PowerShell)</th>
+                  <th>macOS / Linux</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Show current folder</td>
+                  <td><code>Get-ChildItem</code> / <code>dir</code> / <code>ls</code></td>
+                  <td><code>ls</code></td>
+                </tr>
+                <tr>
+                  <td>Change folder</td>
+                  <td><code>cd hello-python</code></td>
+                  <td><code>cd hello-python</code></td>
+                </tr>
+                <tr>
+                  <td>Make a folder</td>
+                  <td><code>New-Item -ItemType Directory demo</code> / <code>mkdir demo</code></td>
+                  <td><code>mkdir demo</code></td>
+                </tr>
+                <tr>
+                  <td>Run a script</td>
+                  <td><code>python hello.py</code></td>
+                  <td><code>python3 hello.py</code></td>
+                </tr>
+                <tr>
+                  <td>Start Python shell</td>
+                  <td><code>python</code></td>
+                  <td><code>python3</code></td>
+                </tr>
+                <tr>
+                  <td>Run a module</td>
+                  <td><code>python -m pip install x</code></td>
+                  <td><code>python3 -m pip install x</code></td>
+                </tr>
+                <tr>
+                  <td>Exit the shell</td>
+                  <td colspan="2"><code>exit()</code> or <kbd class="kbd">Ctrl</kbd>+<kbd class="kbd">Z</kbd> then <kbd
+                      class="kbd">Enter</kbd> (Windows) / <kbd class="kbd">Ctrl</kbd>+<kbd class="kbd">D</kbd>
+                    (macOS/Linux)</td>
+                </tr>
+                <tr>
+                  <td>Clear screen</td>
+                  <td><code>Clear-Host</code> / <code>cls</code></td>
+                  <td><code>clear</code> / <kbd class="kbd">Ctrl</kbd>+<kbd class="kbd">L</kbd></td>
+                </tr>
+                <tr>
+                  <td>Stop a running script</td>
+                  <td colspan="2"><kbd class="kbd">Ctrl</kbd>+<kbd class="kbd">C</kbd></td>
+                </tr>
+                <tr>
+                  <td>Help for any command</td>
+                  <td colspan="2"><code>python --help</code>, <code>pip help</code>, or append <code>--help</code> to
+                    most tools</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ================= 7. RUN THIS SITE ================= -->
+        <section class="step" id="step-local">
+          <div class="step-head">
+            <span class="step-num">7</span>
+            <div>
+              <h2>Run this website locally (optional)</h2>
+              <p class="step-sub">Already know Python? Use it to serve this site — the same command works forever, no
+                Node required.</p>
+            </div>
+          </div>
+
+          <div class="cmd">
+            <div class="cmd-head"><span>Serve the folder with Python</span><span class="actions"><button
+                  class="copy-btn">Copy</button></span></div>
+            <pre><code>cd pymastery          <span class="cm"># the folder that contains index.html</span>
+python -m http.server 8099
+<span class="cm"># macOS / Linux: python3 -m http.server 8099</span></code></pre>
+          </div>
+          <p>Open <a href="http://localhost:8099" target="_blank" rel="noopener"><b>http://localhost:8099</b></a> in
+            your browser. Stop the server with <kbd class="kbd">Ctrl</kbd>+<kbd class="kbd">C</kbd>.</p>
+          <div class="callout info"><span data-icon="info"></span>
+            <div>The playground and challenges download the Python runtime from a CDN, so your machine needs internet
+              the first time. You don't need Python installed to use them — it runs <em>inside the browser</em>. When
+              you're ready, put the site online with the <a href="deploy.html">Vercel deploy guide</a>.</div>
+          </div>
+        </section>
+
+        <!-- ================= 8. CHECKLIST ================= -->
+        <section class="step" id="step-checklist">
+          <div class="step-head">
+            <span class="step-num">8</span>
+            <div>
+              <h2>Setup checklist</h2>
+              <p class="step-sub">Tick items as you go — saved in your browser, nothing is uploaded.</p>
+            </div>
+          </div>
+
+          <div class="checklist" id="checklist">
+            <label class="check-item"><input type="checkbox" /><span class="check-box" data-icon="check"></span><span
+                class="c-text"><b>Python installed</b>python --version (or python3 --version) prints 3.x</span></label>
+            <label class="check-item"><input type="checkbox" /><span class="check-box" data-icon="check"></span><span
+                class="c-text"><b>pip works</b>python -m pip --version prints a pip version</span></label>
+            <label class="check-item"><input type="checkbox" /><span class="check-box" data-icon="check"></span><span
+                class="c-text"><b>Editor ready</b>VS Code (or similar) installed with the Python
+                extension</span></label>
+            <label class="check-item"><input type="checkbox" /><span class="check-box" data-icon="check"></span><span
+                class="c-text"><b>First project created</b>hello.py exists and runs from the terminal</span></label>
+            <label class="check-item"><input type="checkbox" /><span class="check-box" data-icon="check"></span><span
+                class="c-text"><b>Virtual environment understood</b>python -m venv .venv + activation
+                worked</span></label>
+            <label class="check-item"><input type="checkbox" /><span class="check-box" data-icon="check"></span><span
+                class="c-text"><b>One package installed</b>pip install requests succeeds</span></label>
+            <label class="check-item"><input type="checkbox" /><span class="check-box" data-icon="check"></span><span
+                class="c-text"><b>Curriculum started</b>Lesson 1 read and its example typed out</span></label>
+          </div>
+        </section>
+
+        <!-- ================= 9. TROUBLESHOOTING ================= -->
+        <section class="step" id="step-trouble">
+          <div class="step-head">
+            <span class="step-num">9</span>
+            <div>
+              <h2>Troubleshooting</h2>
+              <p class="step-sub">The errors almost everyone hits once — and the exact fix for each.</p>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th>Symptom</th>
+                  <th>Cause</th>
+                  <th>Fix</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>'python' is not recognized…</code></td>
+                  <td>Python wasn't added to the PATH</td>
+                  <td>Re-run the installer → <b>Modify</b> → tick <b>Add python.exe to PATH</b>. Or use the
+                    <code>py</code> launcher: <code>py --version</code></td>
+                </tr>
+                <tr>
+                  <td>Typing <code>python</code> opens the <b>Microsoft Store</b></td>
+                  <td>Windows app-execution alias intercepts the command</td>
+                  <td>Settings → Apps → Advanced app settings → <b>App execution aliases</b> → turn off the two
+                    <b>python.exe</b> (App Installer) entries. Then use <code>python</code> or <code>py</code></td>
+                </tr>
+                <tr>
+                  <td><code>python3: command not found</code></td>
+                  <td>Only <code>python</code> exists, or PATH is stale</td>
+                  <td>Try <code>python --version</code>. On macOS install via the python.org installer or
+                    <code>brew install python3</code></td>
+                </tr>
+                <tr>
+                  <td><code>pip: command not found</code></td>
+                  <td>pip not installed / not on PATH</td>
+                  <td>Call it through the interpreter: <code>python -m pip --version</code>. If missing:
+                    <code>python -m ensurepip --upgrade</code></td>
+                </tr>
+                <tr>
+                  <td><code>error: externally-managed-environment</code></td>
+                  <td>System Python (PEP 668) refuses global installs</td>
+                  <td>Correct fix: create and activate a venv (<code>python -m venv .venv</code>), then
+                    <code>pip install</code> inside it</td>
+                </tr>
+                <tr>
+                  <td><code>Set-ExecutionPolicy</code> error activating venv</td>
+                  <td>PowerShell blocks unsigned scripts</td>
+                  <td>Run once: <code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code>, then re-activate — or
+                    use CMD with <code>.venv\Scripts\activate.bat</code></td>
+                </tr>
+                <tr>
+                  <td>macOS: <code>xcrun: error: invalid active developer path</code></td>
+                  <td>Command Line Tools missing after an OS update</td>
+                  <td>Run <code>xcode-select --install</code> and retry</td>
+                </tr>
+                <tr>
+                  <td><code>Permission denied</code> installing packages</td>
+                  <td>Writing to a system-owned location</td>
+                  <td>Activate a project venv first and install there — never install packages system-wide</td>
+                </tr>
+                <tr>
+                  <td>Wrong output / old behavior after upgrading Python</td>
+                  <td>Multiple versions installed; PATH picks the old one</td>
+                  <td>Check <code>where python</code> (Windows) or <code>which -a python3</code> (macOS/Linux); adjust
+                    PATH order or rely on the venv</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout info"><span data-icon="info"></span>
+            <div>Still stuck? The in-browser <a href="playground.html">playground</a> runs real Python with zero setup,
+              so you can keep learning while you sort out the local install. The official docs also maintain a full <a
+                href="https://docs.python.org/3/using/index.html" target="_blank" rel="noopener">installation guide</a>.
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="index.html"><span class="logo">Py</span><span>PyMastery</span></a>
+        <p>A complete, free path from your first <code>print()</code> to production Python — lessons, module guides,
+          tested challenges and a real in-browser runtime.</p>
+      </div>
+      <div>
+        <h5>Learn</h5>
+        <ul>
+          <li><a href="learn.html">Full curriculum</a></li>
+          <li><a href="learn.html?level=beginner">Beginner track</a></li>
+          <li><a href="learn.html?level=pro">Pro track</a></li>
+          <li><a href="playground.html">Live playground</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Practice</h5>
+        <ul>
+          <li><a href="modules.html">Module library</a></li>
+          <li><a href="practice.html">Challenges</a></li>
+          <li><a href="modules.html?cat=Data%20Science">Data science</a></li>
+          <li><a href="modules.html?cat=System">System &amp; OS</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Guides</h5>
+        <ul>
+          <li><a href="setup.html">Install Python</a></li>
+          <li><a href="setup.html#step-trouble">Troubleshooting</a></li>
+          <li><a href="deploy.html">Deploy to Vercel</a></li>
+          <li><a href="https://www.python.org" target="_blank" rel="noopener">python.org</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 PyMastery — built with vanilla HTML, CSS &amp; JavaScript.</span>
+      <span>Runs on real Python via <a href="https://pyodide.org" target="_blank" rel="noopener">Pyodide</a> · Ready for
+        <a href="deploy.html">Vercel</a></span>
+    </div>
+  </footer>
+
+  <button id="to-top" aria-label="Back to top"><span data-icon="arrow-down"></span></button>
+
+  <script src="js/main.js"></script>
+  <script>
+    /* ---------- OS tab switcher (with auto-detect) ---------- */
+    (function () {
+      const tabs = document.querySelectorAll(".os-tab");
+      const panes = {windows: "pane-windows", macos: "pane-macos", linux: "pane-linux"};
+
+      function select(os) {
+        tabs.forEach((t) => t.classList.toggle("active", t.dataset.os === os));
+        Object.entries(panes).forEach(([key, id]) =>
+          document.getElementById(id).classList.toggle("active", key === os));
+      }
+      tabs.forEach((t) => t.addEventListener("click", () => select(t.dataset.os)));
+
+      const ua = navigator.userAgent;
+      if (/Mac/i.test(ua)) select("macos");
+      else if (/Linux/i.test(ua) && !/Android/i.test(ua)) select("linux");
+      else if (/Win/i.test(ua)) select("windows");
+    })();
+
+    /* ---------- setup checklist (persisted) ---------- */
+    (function () {
+      const KEY = "pymastery.setup";
+      const items = [...document.querySelectorAll("#checklist .check-item")];
+      let state = [];
+      try {state = JSON.parse(localStorage.getItem(KEY)) || [];} catch (_) { }
+
+      items.forEach((item, i) => {
+        const box = item.querySelector("input");
+        if (state.includes(i)) {box.checked = true; item.classList.add("done");}
+        box.addEventListener("change", () => {
+          item.classList.toggle("done", box.checked);
+          state = items
+            .map((it, j) => (it.querySelector("input").checked ? j : -1))
+            .filter((j) => j >= 0);
+          localStorage.setItem(KEY, JSON.stringify(state));
+          if (state.length === items.length)
+            toast("Setup complete — you are ready to learn!");
+        });
+      });
+    })();
+  </script>
+</body>
+
+</html>

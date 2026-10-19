@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PyMastery — Learn Python from First Line to Pro</title>
+  <meta name="description"
+    content="A complete, free path through Python: 38 lessons, 36 module guides, 20 tested challenges and a real Python runtime in your browser. Works on every device." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230A0F1C'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='14' font-weight='700' fill='white' text-anchor='middle'%3EPy%3C/text%3E%3C/svg%3E" />
+</head>
+
+<body>
+  <div id="scroll-progress"></div>
+
+  <nav class="navbar">
+    <a class="brand" href="index.html"><span class="logo">Py</span><span>PyMastery</span></a>
+    <button class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="modules.html">Modules</a></li>
+      <li><a href="practice.html">Practice</a></li>
+      <li><a href="playground.html">Playground</a></li>
+      <li><a href="setup.html">Setup</a></li>
+      <li><a href="deploy.html">Deploy</a></li>
+      <li><a class="nav-cta" href="learn.html">Start learning</a></li>
+    </ul>
+  </nav>
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">
+          <span class="tag">Free</span>
+          <span class="dot-live"></span>
+          38 lessons · 36 modules · real Python 3.12 runtime
+        </span>
+        <h1>Learn Python the way<br />professionals <span class="serif">actually work</span>.</h1>
+        <p class="lede">
+          A complete path from your first <code>print()</code> to decorators, asyncio and
+          production tooling — with runnable examples, tested challenges and guides for
+          setting up Python on your own machine.
+        </p>
+
+        <div class="typing-line">
+          <span>Today:&nbsp;</span><span
+            data-typing="clean Python code|real decorators|REST APIs|data pipelines|job-ready skills"></span>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="learn.html">Start the curriculum <span data-icon="arrow-right"></span></a>
+          <a class="btn btn-ghost" href="playground.html"><span data-icon="play"></span> Try the playground</a>
+        </div>
+
+        <div class="hero-meta">
+          <div>
+            <div class="num">38</div>
+            <div class="lbl">Lessons</div>
+          </div>
+          <div>
+            <div class="num">36</div>
+            <div class="lbl">Modules</div>
+          </div>
+          <div>
+            <div class="num">20</div>
+            <div class="lbl">Challenges</div>
+          </div>
+          <div>
+            <div class="num">0</div>
+            <div class="lbl">Installs needed</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="code-card reveal visible">
+        <div class="win-bar">
+          <span class="win-dots"><i></i><i></i><i></i></span>
+          <span>hello.py</span>
+        </div>
+        <pre><code data-py>from collections import Counter
+
+def top_word(text: str) -> str:
+    words = Counter(text.lower().split())
+    return words.most_common(1)[0][0]
+
+story = "to be or not to be that is the question"
+print(f"most common word: {top_word(story)!r}")
+
+scores = {"Ada": 97, "Linus": 88, "Guido": 99}
+honours = {n: "distinction" for n, s in scores.items() if s >= 90}
+print(honours)</code></pre>
+        <div class="term-mini">
+          <span class="p">$</span> python hello.py<br />
+          most common word: 'be'<br />
+          <span class="ok">{'Ada': 'distinction', 'Guido': 'distinction'}</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= STATS ================= -->
+  <section class="section section-tight" style="padding-top:56px;padding-bottom:56px">
+    <div class="stats-strip reveal">
+      <div class="cell">
+        <div class="num"><span data-count="38">0</span></div>
+        <div class="lbl">Structured lessons</div>
+      </div>
+      <div class="cell">
+        <div class="num"><span data-count="36">0</span></div>
+        <div class="lbl">Module guides</div>
+      </div>
+      <div class="cell">
+        <div class="num"><span data-count="20">0</span></div>
+        <div class="lbl">Tested challenges</div>
+      </div>
+      <div class="cell">
+        <div class="num"><span data-count="100" data-suffix="%">0</span></div>
+        <div class="lbl">Free &amp; open</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HOW IT WORKS ================= -->
+  <section class="section" style="padding-top:24px">
+    <div class="section-head">
+      <div class="kicker">How it works</div>
+      <h2>Three steps from zero to shipped</h2>
+      <p>No prior experience needed. Every step has a dedicated guide with the exact commands to run.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card reveal">
+        <span class="card-num">STEP 01</span>
+        <div class="icon"><span data-icon="terminal"></span></div>
+        <h3>Set up Python</h3>
+        <p>Install Python on Windows, macOS or Linux in about 10 minutes — installer, CLI commands, PATH fixes and your
+          first project.</p>
+        <a class="link" href="setup.html">Open the setup guide <span data-icon="arrow-right"></span></a>
+      </div>
+      <div class="card reveal reveal-d1">
+        <span class="card-num">STEP 02</span>
+        <div class="icon"><span data-icon="book"></span></div>
+        <h3>Follow the curriculum</h3>
+        <p>38 lessons in 11 tracks — syntax, data structures, OOP, decorators, asyncio, typing, testing — each with
+          runnable examples.</p>
+        <a class="link" href="learn.html">Start lesson one <span data-icon="arrow-right"></span></a>
+      </div>
+      <div class="card reveal reveal-d2">
+        <span class="card-num">STEP 03</span>
+        <div class="icon"><span data-icon="rocket"></span></div>
+        <h3>Build &amp; ship</h3>
+        <p>Solve 20 challenges against hidden tests, then put this whole site online yourself with a single Vercel
+          command.</p>
+        <a class="link" href="deploy.html">Read the deploy guide <span data-icon="arrow-right"></span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CURRICULUM ================= -->
+  <section class="section section-alt">
+    <div class="section-head">
+      <div class="kicker">Curriculum</div>
+      <h2>Eleven tracks, one clear path</h2>
+      <p>Every track builds on the last. Mark lessons complete and your progress is saved in the browser.</p>
+    </div>
+    <div class="track-list reveal">
+      <a class="track-row" href="learn.html"><span class="n">01</span>
+        <div>
+          <h4>Foundations</h4>
+          <p>Syntax, types, input/output — the absolute basics</p>
+        </div><span class="arrow" data-icon="arrow-right"></span>
+      </a>
+      <a class="track-row" href="learn.html"><span class="n">02</span>
+        <div>
+          <h4>Control Flow</h4>
+          <p>Branching, looping, match statements, flow control</p>
+        </div><span class="arrow" data-icon="arrow-right"></span>
+      </a>
+      <a class="track-row" href="learn.html"><span class="n">03</span>
+        <div>
+          <h4>Data Structures</h4>
+          <p>Lists, tuples, dicts, sets and comprehensions</p>
+        </div><span class="arrow" data-icon="arrow-right"></span>
+      </a>
+      <a class="track-row" href="learn.html"><span class="n">04</span>
+        <div>
+          <h4>Functions</h4>
+          <p>Arguments, closures, modules and imports</p>
+        </div><span class="arrow" data-icon="arrow-right"></span>
+      </a>
+      <a class="track-row" href="learn.html"><span class="n">05</span>
+        <div>
+          <h4>Files &amp; Errors</h4>
+          <p>File I/O, JSON, context managers, exceptions</p>
+        </div><span class="arrow" data-icon="arrow-right"></span>
+      </a>
+      <a class="track-row" href="learn.html"><span class="n">06</span>
+        <div>
+          <h4>Object-Oriented</h4>
+          <p>Classes, inheritance, properties, dunder methods</p>
+        </div><span class="arrow" data-icon="arrow-right"></span>
+      </a>
+      <a class="track-row" href="learn.html"><span class="n">07</span>
+        <div>
+          <h4>Functional</h4>
+          <p>Decorators, generators, iterators, lambdas</p>
+        </div><span class="arrow" data-icon="arrow-right"></span>
+      </a>
+      <a class="track-row" href="learn.html"><span class="n">08</span>
+        <div>
+          <h4>Concurrency</h4>
+          <p>Threading, multiprocessing and asyncio</p>
+        </div><span class="arrow" data-icon="arrow-right"></span>
+      </a>
+      <a class="track-row" href="learn.html"><span class="n">09</span>
+        <div>
+          <h4>Pro Python</h4>
+          <p>Typing, design patterns, testing, metaclasses</p>
+        </div><span class="arrow" data-icon="arrow-right"></span>
+      </a>
+      <a class="track-row" href="learn.html"><span class="n">10</span>
+        <div>
+          <h4>Practical Apps</h4>
+          <p>APIs, databases, automation, data analysis, web</p>
+        </div><span class="arrow" data-icon="arrow-right"></span>
+      </a>
+      <a class="track-row" href="learn.html"><span class="n">11</span>
+        <div>
+          <h4>Tooling</h4>
+          <p>pip, venv, packaging and project structure</p>
+        </div><span class="arrow" data-icon="arrow-right"></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ================= WHY ================= -->
+  <section class="section">
+    <div class="section-head">
+      <div class="kicker">Why PyMastery</div>
+      <h2>Built like a course, not a blog</h2>
+      <p>Everything here is functional: code really runs, tests really verify, progress really saves.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card reveal">
+        <div class="icon"><span data-icon="zap"></span></div>
+        <h3>Real Python, in your browser</h3>
+        <p>The playground and every challenge run on CPython 3.12 compiled to WebAssembly — the same language, no
+          server, no install.</p>
+      </div>
+      <div class="card reveal reveal-d1">
+        <div class="icon"><span data-icon="target"></span></div>
+        <h3>Practical, not theoretical</h3>
+        <p>Each of the 36 module guides shows concrete applications — parsing JSON logs, hashing passwords, calling
+          APIs, reading CSVs.</p>
+      </div>
+      <div class="card reveal reveal-d2">
+        <div class="icon"><span data-icon="shield"></span></div>
+        <h3>Challenges with hidden tests</h3>
+        <p>Write your solution, press Run, and your code is executed against real assertions. Passing means passing.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><span data-icon="lightbulb"></span></div>
+        <h3>Hints only when you ask</h3>
+        <p>Solutions stay hidden until you press the button. Try first, read the hint second, study the reference answer
+          last.</p>
+      </div>
+      <div class="card reveal reveal-d1">
+        <div class="icon"><span data-icon="trending"></span></div>
+        <h3>Progress that sticks</h3>
+        <p>Completed lessons and solved challenges are stored locally in your browser — no account, no tracking, no
+          server.</p>
+      </div>
+      <div class="card reveal reveal-d2">
+        <div class="icon"><span data-icon="monitor"></span></div>
+        <h3>Every screen, every device</h3>
+        <p>A responsive layout tuned from 320&nbsp;px phones to ultrawide monitors, with keyboard shortcuts for power
+          users.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MODULE PREVIEW ================= -->
+  <section class="section section-alt">
+    <div class="section-head"
+      style="display:flex;justify-content:space-between;align-items:end;max-width:none;gap:20px;flex-wrap:wrap">
+      <div style="max-width:640px">
+        <div class="kicker">Module library</div>
+        <h2>The standard library, explained</h2>
+        <p>36 guides with runnable examples — from <code>math</code> to <code>asyncio</code>.</p>
+      </div>
+      <a class="btn btn-ghost btn-sm" href="modules.html">Browse all 36 <span data-icon="arrow-right"></span></a>
+    </div>
+    <div class="module-grid reveal" id="module-preview"></div>
+  </section>
+
+  <!-- ================= PROBLEM PREVIEW ================= -->
+  <section class="section">
+    <div class="section-head"
+      style="display:flex;justify-content:space-between;align-items:end;max-width:none;gap:20px;flex-wrap:wrap">
+      <div style="max-width:640px">
+        <div class="kicker">Practice</div>
+        <h2>Prove it with working code</h2>
+        <p>20 interview-style challenges, verified by a live Python runtime.</p>
+      </div>
+      <a class="btn btn-ghost btn-sm" href="practice.html">All challenges <span data-icon="arrow-right"></span></a>
+    </div>
+    <div class="grid grid-3" id="problem-preview"></div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="section section-tight" style="padding-bottom:96px">
+    <div class="banner reveal">
+      <div class="kicker" style="justify-content:center">Deploy</div>
+      <h2>Take this whole site live in five minutes</h2>
+      <p>The site is 100% static — one folder, no build step. Follow the step-by-step Vercel guide and share your own
+        copy with the world.</p>
+      <div class="btn-row">
+        <a class="btn btn-dark" href="deploy.html"><span data-icon="cloud"></span> Vercel deployment guide</a>
+        <a class="btn btn-ghost" href="setup.html"><span data-icon="terminal"></span> Install Python first</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="section section-alt">
+    <div class="section-head center">
+      <div class="kicker">FAQ</div>
+      <h2>Questions, answered</h2>
+    </div>
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-q">Do I have to install Python to use this site?<span class="fq-ico">+</span></button>
+        <div class="faq-a">
+          <div class="faq-a-inner">No. The playground and all 20 challenges run a real CPython 3.12 interpreter inside
+            your browser (via WebAssembly), so you can learn right now. Installing Python locally is still the right
+            move for real projects — the <a href="setup.html">setup guide</a> walks you through it in about 10 minutes.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Which Python version should I install?<span class="fq-ico">+</span></button>
+        <div class="faq-a">
+          <div class="faq-a-inner">Any actively supported version — 3.12 or 3.13 are ideal. Check what you have with
+            <code>python --version</code> (Windows) or <code>python3 --version</code> (macOS/Linux). All lessons follow
+            modern, idiomatic Python.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How do the hidden tests work?<span class="fq-ico">+</span></button>
+        <div class="faq-a">
+          <div class="faq-a-inner">When you press “Run tests”, your editor code and the challenge's private assertions
+            are executed together in your browser. If every assertion passes, a green badge appears and the challenge is
+            marked solved. Nothing is sent to a server.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is my progress saved?<span class="fq-ico">+</span></button>
+        <div class="faq-a">
+          <div class="faq-a-inner">Yes — completed lessons and solved challenges are stored in your browser's
+            localStorage. No account is needed and nothing leaves your device. Each page offers a reset button if you
+            want a fresh start.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Does it work on phones and tablets?<span class="fq-ico">+</span></button>
+        <div class="faq-a">
+          <div class="faq-a-inner">Yes. The layout adapts from small phones to desktop; editors, modals and navigation
+            are all touch-friendly. The only difference is screen size — the same code, tests and progress tracking work
+            everywhere.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can I deploy this website myself?<span class="fq-ico">+</span></button>
+        <div class="faq-a">
+          <div class="faq-a-inner">Absolutely — that's the point. It's a plain static site, so the <a
+              href="deploy.html">Vercel guide</a> covers both the CLI route (<code>vercel --prod</code>) and the GitHub
+            dashboard route, plus custom domains and troubleshooting.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="index.html"><span class="logo">Py</span><span>PyMastery</span></a>
+        <p>A complete, free path from your first <code>print()</code> to production Python — lessons, module guides,
+          tested challenges and a real in-browser runtime.</p>
+      </div>
+      <div>
+        <h5>Learn</h5>
+        <ul>
+          <li><a href="learn.html">Full curriculum</a></li>
+          <li><a href="learn.html?level=beginner">Beginner track</a></li>
+          <li><a href="learn.html?level=pro">Pro track</a></li>
+          <li><a href="playground.html">Live playground</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Practice</h5>
+        <ul>
+          <li><a href="modules.html">Module library</a></li>
+          <li><a href="practice.html">Challenges</a></li>
+          <li><a href="modules.html?cat=Data%20Science">Data science</a></li>
+          <li><a href="modules.html?cat=System">System &amp; OS</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Guides</h5>
+        <ul>
+          <li><a href="setup.html">Install Python</a></li>
+          <li><a href="setup.html#step-trouble">Troubleshooting</a></li>
+          <li><a href="deploy.html">Deploy to Vercel</a></li>
+          <li><a href="https://www.python.org" target="_blank" rel="noopener">python.org</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 PyMastery — built with vanilla HTML, CSS &amp; JavaScript.</span>
+      <span>Runs on real Python via <a href="https://pyodide.org" target="_blank" rel="noopener">Pyodide</a> · Ready for
+        <a href="deploy.html">Vercel</a></span>
+    </div>
+  </footer>
+
+  <button id="to-top" aria-label="Back to top"><span data-icon="arrow-down"></span></button>
+
+  <script src="js/data/lessons.js"></script>
+  <script src="js/data/modules.js"></script>
+  <script src="js/data/problems.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    /* ---------- home page dynamic previews ---------- */
+    (function () {
+      // 1) module preview: a spread of categories, linked to the module page
+      const picks = ["math", "os", "json", "re", "threading", "asyncio", "pandas", "requests", "flask"];
+      const mp = document.getElementById("module-preview");
+      if (mp) {
+        picks.forEach((name) => {
+          const m = MODULES.find((x) => x.name === name);
+          if (!m) return;
+          const el = document.createElement("div");
+          el.className = "module-card";
+          el.setAttribute("data-icon", window.iconForCategory(m.category));
+          el.innerHTML = `<h3>${m.name}</h3>
+            <div class="m-cat">${m.category}</div><p>${m.tagline}</p>`;
+          el.addEventListener("click", () => (location.href = "modules.html?mod=" + encodeURIComponent(m.name)));
+          mp.appendChild(el);
+        });
+        window.renderIcons(mp);
+      }
+
+      // 2) problem preview
+      const pp = document.getElementById("problem-preview");
+      if (pp) {
+        ["p01", "p10", "p14"].forEach((id) => {
+          const p = PROBLEMS.find((x) => x.id === id);
+          if (!p) return;
+          const el = document.createElement("div");
+          el.className = "card reveal";
+          el.innerHTML = `<span class="chip ${p.level}">${p.level}</span>
+            <h3 style="margin-top:12px">${p.title}</h3>
+            <p>${p.desc.slice(0, 110)}…</p>
+            <div class="p-tags" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px">
+              ${p.topics.map((t) => `<span class="chip topic">${t}</span>`).join("")}
+            </div>
+            <a class="link" href="practice.html#${p.id}">Solve it <span data-icon="arrow-right"></span></a>`;
+          pp.appendChild(el);
+          window.renderIcons(el);
+          requestAnimationFrame(() => el.classList.add("visible"));
+        });
+      }
+    })();
+  </script>
+</body>
+
+</html>

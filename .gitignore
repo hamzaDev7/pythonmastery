@@ -1,0 +1,19 @@
+# Vercel
+.vercel/
+
+# Node (only used for tooling, never shipped)
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.log
+
+# QA harness artifacts
+tools/_*.json

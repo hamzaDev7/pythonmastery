@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Playground — Run Python in Your Browser · PyMastery</title>
+  <meta name="description" content="A real CPython 3.12 interpreter running in your browser. Edit the code, press Run, see the output instantly — no install, no server." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230A0F1C'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='14' font-weight='700' fill='white' text-anchor='middle'%3EPy%3C/text%3E%3C/svg%3E" />
+</head>
+
+<body>
+  <div id="scroll-progress"></div>
+
+  <nav class="navbar">
+    <a class="brand" href="index.html"><span class="logo">Py</span><span>PyMastery</span></a>
+    <button class="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="learn.html">Learn</a></li>
+      <li><a href="modules.html">Modules</a></li>
+      <li><a href="practice.html">Practice</a></li>
+      <li><a href="playground.html">Playground</a></li>
+      <li><a href="setup.html">Setup</a></li>
+      <li><a href="deploy.html">Deploy</a></li>
+      <li><a class="nav-cta" href="practice.html">Try a challenge</a></li>
+    </ul>
+  </nav>
+
+  <header class="page-hero">
+    <div class="inner">
+      <div class="crumb"><a href="index.html">Home</a> / Playground</div>
+      <h1>Run Python. <span class="serif">Right here.</span></h1>
+      <p>A complete CPython 3.12 interpreter compiled to WebAssembly runs in this tab. Edit the code, press Run, and see real output — nothing is sent anywhere.</p>
+    </div>
+  </header>
+
+  <div class="snippet-bar" id="snippets"></div>
+
+  <div class="play-shell">
+    <div class="play-grid">
+      <div class="play-pane">
+        <div class="pane-head">
+          <span class="lang">PY</span>
+          <span>editor.py</span>
+        </div>
+        <textarea class="editor" id="play-editor" spellcheck="false" aria-label="Python editor"># Press Run (Ctrl+Enter / Cmd+Enter) to execute this cell.
+# Everything runs locally in your browser — real CPython, no server.
+
+name = "Developer"
+print(f"Hello, {name}!")
+
+scores = {"math": 92, "english": 85, "science": 97}
+average = sum(scores.values()) / len(scores)
+print("average score:", round(average, 1))
+
+for subject, score in sorted(scores.items(), key=lambda kv: -kv[1]):
+    print(f"  {subject:<10} {score}")</textarea>
+        <div class="run-bar">
+          <button class="run-btn" id="btn-run" data-icon="play"><span>Run</span></button>
+          <button class="sol-btn" id="btn-clear" data-icon="refresh"><span>Clear output</span></button>
+          <button class="sol-btn" id="btn-reset" data-icon="edit"><span>Reset code</span></button>
+          <span id="run-meta" style="margin-left:auto;font-size:.78rem;color:var(--muted)" class="mono">Ctrl + Enter</span>
+        </div>
+      </div>
+
+      <div class="play-pane">
+        <div class="pane-head">
+          <span class="lang">OUT</span>
+          <span>output</span>
+          <span style="margin-left:auto;display:flex;gap:10px;align-items:center">
+            <span class="chip intermediate" id="runtime-status">loading Python runtime…</span>
+            <span class="mono" id="exec-time" style="font-size:.76rem;color:var(--muted)"></span>
+          </span>
+        </div>
+        <div id="play-output"><span class="sys">Output will appear here — press Run when ready.</span></div>
+        <div class="run-bar" style="background:var(--code-head)">
+          <span style="font-size:.79rem;color:var(--muted)">Tip: import anything from the standard library — <code style="font-size:.9em">json</code>, <code style="font-size:.9em">re</code>, <code style="font-size:.9em">datetime</code>, <code style="font-size:.9em">math</code>…</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout info" style="margin-top:24px">
+      <span data-icon="info"></span>
+      <div><b>First time here?</b> The runtime is downloaded once (about 10&nbsp;MB) and cached by your browser. Want Python on your own machine instead? Follow the <a href="setup.html">10-minute setup guide</a> — or test yourself with a <a href="practice.html">challenge</a>.</div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="index.html"><span class="logo">Py</span><span>PyMastery</span></a>
+        <p>A complete, free path from your first <code>print()</code> to production Python — lessons, module guides, tested challenges and a real in-browser runtime.</p>
+      </div>
+      <div>
+        <h5>Learn</h5>
+        <ul>
+          <li><a href="learn.html">Full curriculum</a></li>
+          <li><a href="learn.html?level=beginner">Beginner track</a></li>
+          <li><a href="learn.html?level=pro">Pro track</a></li>
+          <li><a href="playground.html">Live playground</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Practice</h5>
+        <ul>
+          <li><a href="modules.html">Module library</a></li>
+          <li><a href="practice.html">Challenges</a></li>
+          <li><a href="modules.html?cat=Data%20Science">Data science</a></li>
+          <li><a href="modules.html?cat=System">System &amp; OS</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Guides</h5>
+        <ul>
+          <li><a href="setup.html">Install Python</a></li>
+          <li><a href="setup.html#step-trouble">Troubleshooting</a></li>
+          <li><a href="deploy.html">Deploy to Vercel</a></li>
+          <li><a href="https://www.python.org" target="_blank" rel="noopener">python.org</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 PyMastery — built with vanilla HTML, CSS &amp; JavaScript.</span>
+      <span>Runs on real Python via <a href="https://pyodide.org" target="_blank" rel="noopener">Pyodide</a> · Ready for <a href="deploy.html">Vercel</a></span>
+    </div>
+  </footer>
+
+  <button id="to-top" aria-label="Back to top"><span data-icon="arrow-down"></span></button>
+
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/playground.js"></script>
+</body>
+</html>
